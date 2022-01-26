@@ -22,3 +22,9 @@ function ImageGalleryItem({ preview, alt, img }) {
 }
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  preview: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};

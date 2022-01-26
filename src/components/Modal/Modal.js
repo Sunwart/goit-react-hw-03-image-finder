@@ -6,6 +6,8 @@ import { ModalBackdrop, ModalContent } from './Modal.styled';
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
+  static propTypes = { children: PropTypes.node.isRequired };
+
   state = { show: true };
 
   toggleModal = () => {
