@@ -25,7 +25,7 @@ export default class App extends Component {
 
       imagesApi.getImages(newQuery, newPage).then(images => {
         if (images.hits.length === 0) {
-          Notiflix.Notify.info('No images found');
+          Notiflix.Notify.info('Sorry, no images found on your request.');
           this.setState({ status: 'rejected', images: [] });
           return;
         }
@@ -44,7 +44,11 @@ export default class App extends Component {
   }
 
   handleSearchFormSubmit = query => {
-    this.setState({ query, page: 1, images: [] });
+    if (query !== this.state.query) {
+      this.setState({ query, page: 1, images: [] });
+    } else {
+      Notiflix.Notify.info('Please, enter new search request.');
+    }
   };
 
   handleLoadMore() {
