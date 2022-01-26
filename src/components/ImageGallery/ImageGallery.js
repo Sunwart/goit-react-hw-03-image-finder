@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 import imagesApi from '../../services/imagesAPI';
 import { ImageGalleryContainer } from './ImageGallery.styled';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
-import { Button } from '../Button/Button.styled';
+import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
 
 export default class ImageGallery extends Component {
@@ -73,9 +73,7 @@ export default class ImageGallery extends Component {
         {status === 'pending' && <Loader />}
 
         {status === 'resolved' && (
-          <Button type="button" onClick={() => this.handleLoadMore()}>
-            Load more
-          </Button>
+          <Button type="button" onClick={() => this.handleLoadMore()} btnName={' Load more'} />
         )}
       </>
     );

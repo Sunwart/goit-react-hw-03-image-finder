@@ -6,8 +6,10 @@ import { ModalBackdrop, ModalContent } from './Modal.styled';
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
+  state = { show: true };
+
+  toggleModal = () => {
+    this.setState(prevState => ({ show: !prevState.show }));
   };
 
   componentDidMount() {
@@ -20,22 +22,26 @@ export default class Modal extends Component {
 
   handleKeyDown = event => {
     if (event.code === 'Escape') {
-      this.props.onClose();
+      this.setState({ show: false });
     }
   };
 
   handleBackdropClick = event => {
     if (event.target === event.currentTarget) {
-      this.props.onClose();
+      this.setState({ show: false });
     }
   };
 
   render() {
-    return createPortal(
-      <ModalBackdrop onClick={this.handleBackdropClick}>
-        <ModalContent>{this.props.children}</ModalContent>
-      </ModalBackdrop>,
-      modalRoot,
-    );
+    if (this.state.show === true) {
+      return createPortal(
+        <ModalBackdrop onClick={this.handleBackdropClick}>
+          <ModalContent>{this.props.children}</ModalContent>
+        </ModalBackdrop>,
+        modalRoot,
+      );
+    } else {
+      return <></>;
+    }
   }
 }
